@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html th:lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="/fragments/partials.html :: headerfiles">
+    </th:block>
+    <title>Blog Posts</title>
+</head>
+<body>
+<header>
+    <div th:replace="/fragments/partials.html :: navbar"></div>
+</header>
+<main>
+    <div class="container">
+        <h3 class="mb-5">Blog Posts</h3>
+        <div th:each="post : ${posts}">
+            <div class="mb-3">
+                <p class="lead fw-bold">
+                    <span th:text="${post.title}"></span>
+                </p>
+                <span th:text="${post.body}"></span>
+                <br>
+                post id: <span th:text="${post.id}"></span>
+            </div>
+            <hr>
+        </div>
+    </div>
+</main>
+<div th:replace="/fragments/partials.html :: footer"></div>
+</body>
+</html>

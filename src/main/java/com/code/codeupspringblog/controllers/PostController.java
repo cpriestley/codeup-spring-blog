@@ -30,15 +30,22 @@ public class PostController {
         model.addAttribute("post", postRepo.getPostById(id));
         return "posts/show";
     }
+    @GetMapping("/posts/{id}/edit")
+    public String editPost(@PathVariable long id, Model model) {
+        return showEditOrCreateView(model, postRepo.getPostById(id));
+    }
     @GetMapping("/posts/create")
     public String startPost(Model model) {
-        model.addAttribute("post", new Post());
-        return "posts/create";
+        return showEditOrCreateView(model, new Post());
     }
     @PostMapping("/posts/create")
     public String createPost(@ModelAttribute Post post) {
         post.setOwner(userRepo.findByUsername("clayton"));
         postRepo.save(post);
         return "redirect:/posts";
+    }
+    private String showEditOrCreateView(Model model, Post post) {
+        model.addAttribute("post", post);
+        return "posts/create";
     }
 }

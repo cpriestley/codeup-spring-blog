@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html th:lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="/fragments/partials.html :: headerfiles">
     </th:block>
@@ -10,11 +10,11 @@
     <div th:replace="/fragments/partials.html :: navbar"></div>
 </header>
 <main>
-    <div class="container">
-        <h3 class="my-3" th:text="${post.title}"></h3>
+    <div class="container" th:object="${post}">
+        <h3 class="my-3" th:text="*{title}"></h3>
         <div class="mb-3">
-            <p th:text="${post.body}"></p>
-            post id: <span th:text="${post.id}"></span>
+            <p th:text="*{body}"></p>
+            post id: <span th:text="*{id}"></span>
         </div>
     </div>
 </main>

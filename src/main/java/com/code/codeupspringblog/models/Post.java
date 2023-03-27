@@ -3,10 +3,11 @@ package com.code.codeupspringblog.models;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Table(name = "posts")
 public class Post {
     @Id
@@ -16,4 +17,7 @@ public class Post {
     private String title;
     @Column(nullable = false, length = 5000)
     private String body;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    private User owner;
 }

@@ -2,6 +2,8 @@ package com.code.codeupspringblog.controllers;
 
 import com.code.codeupspringblog.models.Post;
 import com.code.codeupspringblog.repositories.PostRepository;
+import com.code.codeupspringblog.repositories.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class PostController {
     PostRepository postRepo;
-    PostController(PostRepository postRepo) {
-        this.postRepo = postRepo;
-    }
+    UserRepository userRepo;
     @GetMapping("/posts")
     public String index(Model model) {
         List<Post> posts = new ArrayList<>(postRepo.getAll());
@@ -36,6 +37,7 @@ public class PostController {
     }
     @PostMapping("/posts/create")
     public String createPost(@ModelAttribute Post post) {
+        post.setOwner(userRepo.findByUsername("clayton"));
         postRepo.save(post);
         return "redirect:/posts";
     }

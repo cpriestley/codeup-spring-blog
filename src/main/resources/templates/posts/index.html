@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html th:lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="/fragments/partials.html :: headerfiles">
     </th:block>
@@ -20,6 +20,8 @@
                 <span th:text="${post.body}"></span>
                 <br>
                 post id: <span th:text="${post.id}"></span>
+                <br>
+                owner: <span th:text="${post.owner.email}"></span>
             </div>
             <hr>
         </div>

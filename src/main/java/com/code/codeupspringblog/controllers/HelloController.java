@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.*;
 public class HelloController {
 
     @GetMapping("/hello")
-    @ResponseBody
     public String helloWorld() {
-        return "Hello from Spring!";
+        return "hello";
     }
 
     @GetMapping("/hello/{name}")

@@ -1,40 +1,74 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <th:block th:include="/fragments/partials.html :: headerfiles"></th:block>
     <title>Roll Dice</title>
 </head>
 <body>
-    <h1>Roll Dice</h1>
-    <div>
-        <h2>Guess the number!</h2>
-        <div>
-            <a href="/roll-dice/1" class="href">1</a>
-        </div>
-        <div>
-            <a href="/roll-dice/2" class="href">2</a>
-        </div>
-        <div>
-            <a href="/roll-dice/3" class="href">3</a>
-        </div>
-        <div>
-            <a href="/roll-dice/4" class="href">4</a>
-        </div>
-        <div>
-            <a href="/roll-dice/5" class="href">5</a>
-        </div>
-        <div>
-            <a href="/roll-dice/6" class="href">6</a>
-        </div>
+    <header>
+        <div th:replace="/fragments/partials.html :: navbar"></div>
+    </header>
+    <div class="container my-3">
+        <h1>Roll Dice</h1>
     </div>
-    <div>
-        <br>
-        <div>
-            Your guess: <span th:text="${guess}"></span>
-        </div>
-        <div>
-            The dice: <span th:text="${result}"></span>
-        </div>
+    <div class = "container">
+        <table class="table mb-5">
+            <tr>
+                <td th:colspan="6"><h2 class="text-center">Guess the number!</h2></td>
+            </tr>
+            <tr>
+                <td class="text-center">
+                    <a href="/roll-dice/1" class="href"><img src="/img/dice1.jpg" alt="">   </a>
+                </td>
+                <td class="text-center">
+                    <a href="/roll-dice/2" class="href"><img src="/img/dice2.jpg" alt="">   </a>
+                </td>
+                <td class="text-center">
+                    <a href="/roll-dice/3" class="href"><img src="/img/dice3.jpg" alt="">   </a>
+                </td>
+                <td class="text-center">
+                    <a href="/roll-dice/4" class="href"><img src="/img/dice4.jpg" alt="">   </a>
+                </td>
+                <td class="text-center">
+                    <a href="/roll-dice/5" class="href"><img src="/img/dice5.jpg" alt="">   </a>
+                </td>
+                <td class="text-center">
+                    <a href="/roll-dice/6" class="href"><img src="/img/dice6.jpg" alt="">   </a>
+                </td>
+            </tr>
+        </table>
+        <table class="table">
+            <tr>
+                <td class="text-center w-25 fs-3 py-3 pe-0">You Guessed:</td>
+                <th:block th:switch="${guess}">
+                    <td th:colspan="2" th:case="1" style="background-image: url('/img/dice1.jpg'); background-repeat: no-repeat; background-size: contain;"></td>
+                    <td th:colspan="2" th:case="2" style="background-image: url('/img/dice2.jpg'); background-repeat: no-repeat; background-size: contain;"></td>
+                    <td th:colspan="2" th:case="3" style="background-image: url('/img/dice3.jpg'); background-repeat: no-repeat; background-size: contain;"></td>
+                    <td th:colspan="2" th:case="4" style="background-image: url('/img/dice4.jpg'); background-repeat: no-repeat; background-size: contain;"></td>
+                    <td th:colspan="2" th:case="5" style="background-image: url('/img/dice5.jpg'); background-repeat: no-repeat; background-size: contain;"></td>
+                    <td th:colspan="2" th:case="6" style="background-image: url('/img/dice6.jpg'); background-repeat: no-repeat; background-size: contain;"></td>
+                </th:block>
+            </tr>
+            <tr>
+                <th>Roll #</th>
+                <th>Result</th>
+                <th>Match</th>
+            </tr>
+            <th:block th:each="result,count : ${results}">
+                <tr>
+                    <td class="align-middle" th:text="${count.count}"/>
+                    <th:block th:switch="${result}">
+                        <td class="align-middle" th:case="1" style="background-image: url('/img/dice1.jpg'); background-repeat: no-repeat; background-size: contain;"></td>
+                        <td class="align-middle" th:case="2" style="background-image: url('/img/dice2.jpg'); background-repeat: no-repeat; background-size: contain;"></td>
+                        <td class="align-middle" th:case="3" style="background-image: url('/img/dice3.jpg'); background-repeat: no-repeat; background-size: contain;"></td>
+                        <td class="align-middle" th:case="4" style="background-image: url('/img/dice4.jpg'); background-repeat: no-repeat; background-size: contain;"></td>
+                        <td class="align-middle" th:case="5" style="background-image: url('/img/dice5.jpg'); background-repeat: no-repeat; background-size: contain;"></td>
+                        <td class="align-middle" th:case="6" style="background-image: url('/img/dice6.jpg'); background-repeat: no-repeat; background-size: contain;"></td>
+                    </th:block>
+                    <td class="align-middle" th:text="${result == guess} ? 'Yes' : 'No'"/>
+                </tr>
+            </th:block>
+        </table>
     </div>
 </body>
 </html>

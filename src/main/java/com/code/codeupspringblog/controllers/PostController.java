@@ -3,6 +3,7 @@ package com.code.codeupspringblog.controllers;
 import com.code.codeupspringblog.models.Post;
 import com.code.codeupspringblog.repositories.PostRepository;
 import com.code.codeupspringblog.repositories.UserRepository;
+import com.code.codeupspringblog.services.EmailService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ import java.util.List;
 public class PostController {
     PostRepository postRepo;
     UserRepository userRepo;
+    EmailService emailService;
     @GetMapping("/posts")
     public String index(Model model) {
         List<Post> posts = new ArrayList<>(postRepo.getAll());
@@ -42,6 +44,11 @@ public class PostController {
     public String createPost(@ModelAttribute Post post) {
         post.setOwner(userRepo.findByUsername("clayton"));
         postRepo.save(post);
+        emailService.prepareAndSend(
+                post,
+                "Post Created [%s]".formatted(post.getTitle()),
+                "Your post has been created"
+        );
         return "redirect:/posts";
     }
     private String showEditOrCreateView(Model model, Post post) {

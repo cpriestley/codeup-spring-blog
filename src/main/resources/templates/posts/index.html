@@ -10,8 +10,10 @@
     <div th:replace="~{/fragments/partials.html :: navbar}"></div>
 </header>
 <main>
+    <div class="container my-3">
+        <h1>Blog Posts</h1>
+    </div>
     <div class="container">
-        <h3 class="mb-5">Blog Posts</h3>
         <div th:each="post : ${posts}">
             <div class="mb-3">
                 <p class="lead fw-bold">
@@ -21,7 +23,7 @@
                 <br>
                 post id: <span th:text="${post.id}"></span>
                 <br>
-                owner: <span th:text="${post.owner.email}"></span>
+                owner: <span th:text="${post.user.email}"></span>
             </div>
             <hr>
         </div>

@@ -9,9 +9,11 @@
 <header>
     <div th:replace="~{/fragments/partials.html :: navbar}"></div>
 </header>
-<main>
-    <div class="container" th:object="${post}">
+<main th:object="${post}">
+    <div class="container my-3">
         <h3 class="my-3" th:text="*{title}"></h3>
+    </div>
+    <div class="container">
         <div class="mb-3">
             <p th:text="*{body}"></p>
             post id: <span th:text="*{id}"></span>

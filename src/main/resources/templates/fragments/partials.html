@@ -35,6 +35,11 @@
           <li class="nav-item">
             <a class="nav-link" href="/roll-dice">Dice Game</a>
           </li>
+          <li class="nav-item">
+            <form th:action="@{/logout}" th:method="post">
+              <button class="btn nav-link border-0">Logout</button>
+            </form>
+          </li>
         </ul>
       </div>
     </div>

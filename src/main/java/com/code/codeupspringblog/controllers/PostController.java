@@ -42,7 +42,8 @@ public class PostController {
     }
     @PostMapping("/posts/create")
     public String createPost(@ModelAttribute Post post) {
-        post.setOwner(userRepo.findByUsername("clayton"));
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        post.setOwner(user);
         postRepo.save(post);
         emailService.prepareAndSend(
                 post,

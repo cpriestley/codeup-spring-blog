@@ -12,6 +12,15 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 public class User {
+
+    public User (User copy) {
+        id = copy.id;
+        email = copy.email;
+        password = copy.password;
+        username = copy.username;
+        name = copy.name;
+        posts = copy.posts;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

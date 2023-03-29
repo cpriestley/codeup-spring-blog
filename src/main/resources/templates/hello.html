@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <th:block th:insert="~{/fragments/partials.html :: headerfiles}">
     </th:block>
@@ -9,11 +9,41 @@
     <header>
         <div th:replace="~{/fragments/partials.html :: navbar}"></div>
     </header>
+    <div sec:authorize="isAuthenticated()">
     <main>
+        <div class="container my-3">
+            <h1>Hello, from <span th:text="${name} ?: 'Spring'"></span>!</h1>
+        </div>
         <div class="container">
-            <h1>Hello, <span th:text="${name} ?: 'from Spring'"></span>!</h1>
+            <form th:action="~{/home}" id="greeter">
+                <div class="form-group mb-3">
+                    <label class="form-label fw-bold" for="greeter-name">Hello from: </label>
+                    <input type="text" class="form-control" th:value="${#authentication.principal.username}" id="greeter-name">
+                </div>
+                <div class="form-group mb-3">
+                    <button type="submit" class="btn btn-primary mt-3" th:text="Submit" />
+                </div>
+            </form>
         </div>
     </main>
+    </div>
     <div th:replace="~{/fragments/partials.html :: footer}"></div>
+<script>
+    function setGreeter() {
+        $('#greeter').attr('action', '/hello/' + $('#greeter-name').val().trim());
+    }
+    setGreeter();
+    $(document).ready(function() {
+        $('#greeter-name').change(function(e) {
+            e.preventDefault();
+            setGreeter();
+        });
+
+        $('greeter').submit(function(e) {
+            e.preventDefault();
+            window.location.pathname = $('#greeter').attr('action');
+        });
+    });
+</script>
 </body>
 </html>

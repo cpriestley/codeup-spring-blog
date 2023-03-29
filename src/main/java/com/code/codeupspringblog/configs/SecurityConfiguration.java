@@ -41,10 +41,10 @@ public class SecurityConfiguration {
                 .logoutSuccessUrl("/") // append a query string value
             .and()
             .authorizeHttpRequests(request -> request
-                .requestMatchers("/posts/create", "/posts/{id}/edit")
+                .requestMatchers("/hello", "/hello/{name}", "/posts/create", "/posts/{id}/edit", "/posts/{id}/delete", "/users/{id}/delete")
                 .authenticated()
-                .requestMatchers("/", "/css/**", "/img/**", "/js/**", "/posts", "/posts/{id}",
-                        "/hello", "/hello/{name}", "/join", "/roll-dice", "/roll-dice/{guess}")
+                .requestMatchers("/", "/css/**", "/img/**", "/js/**",
+                        "/sign-up", "/posts", "/posts/{id}", "/join", "/roll-dice", "/roll-dice/{guess}")
                 .permitAll()
             );
         return http.build();

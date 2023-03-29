@@ -17,7 +17,7 @@ public class Post {
     private String title;
     @Column(nullable = false, length = 5000)
     private String body;
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
-    private User owner;
+    private User user;
 }

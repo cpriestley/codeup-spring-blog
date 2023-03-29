@@ -9,7 +9,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +33,12 @@ public class PostController {
     public String getPost(@PathVariable long id, Model model) {
         model.addAttribute("post", postRepo.getPostById(id));
         return "/posts/show";
+    }
+    @GetMapping("/posts/{id}/delete")
+    public String deletePost(@PathVariable long id) {
+        Post post = postRepo.getPostById(id);
+        postRepo.delete(post);
+        return "redirect:/posts";
     }
     @GetMapping("/posts/{id}/edit")
     public String editPost(@PathVariable long id, Model model) {

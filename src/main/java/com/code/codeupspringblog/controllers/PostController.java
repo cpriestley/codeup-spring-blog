@@ -1,16 +1,15 @@
 package com.code.codeupspringblog.controllers;
 
 import com.code.codeupspringblog.models.Post;
+import com.code.codeupspringblog.models.User;
 import com.code.codeupspringblog.repositories.PostRepository;
 import com.code.codeupspringblog.repositories.UserRepository;
 import com.code.codeupspringblog.services.EmailService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +24,12 @@ public class PostController {
     public String index(Model model) {
         List<Post> posts = new ArrayList<>(postRepo.getAll());
         model.addAttribute( "posts", posts);
-        return "posts/index";
+        return "/posts/index";
     }
     @GetMapping("/posts/{id}")
     public String getPost(@PathVariable long id, Model model) {
         model.addAttribute("post", postRepo.getPostById(id));
-        return "posts/show";
+        return "/posts/show";
     }
     @GetMapping("/posts/{id}/edit")
     public String editPost(@PathVariable long id, Model model) {

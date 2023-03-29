@@ -7,13 +7,13 @@
 </head>
 <body>
     <header>
-        <div th:replace="/fragments/partials.html :: navbar"></div>
+        <div th:replace="~{/fragments/partials.html :: navbar}"></div>
     </header>
     <main>
         <div class="container">
             <h1>Hello, <span th:text="${name} ?: 'from Spring'"></span>!</h1>
         </div>
     </main>
-    <div th:replace="/fragments/partials.html :: footer"></div>
+    <div th:replace="~{/fragments/partials.html :: footer}"></div>
 </body>
 </html>

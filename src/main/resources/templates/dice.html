@@ -6,7 +6,7 @@
 </head>
 <body>
     <header>
-        <div th:replace="/fragments/partials.html :: navbar"></div>
+        <div th:replace="~{/fragments/partials.html :: navbar}"></div>
     </header>
     <div class="container my-3">
         <h1>Roll Dice</h1>
@@ -70,6 +70,6 @@
             </th:block>
         </table>
     </div>
-    <div th:replace="/fragments/partials.html :: footer"></div>
+    <div th:replace="~{/fragments/partials.html :: footer}"></div>
 </body>
 </html>

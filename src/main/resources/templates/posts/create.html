@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <th:block th:include="/fragments/partials.html :: headerfiles">
+    <th:block th:insert="~{/fragments/partials.html :: headerfiles}">
     </th:block>
     <title>Create Post</title>
 </head>
 <body>
+<div sec:authorize="isAuthenticated()">
 <header>
-    <div th:replace="/fragments/partials.html :: navbar"></div>
+    <div th:replace="~{/fragments/partials.html :: navbar}"></div>
 </header>
 <main>
     <div class="container">
@@ -40,6 +41,7 @@
         </div>
     </div>
 </main>
-<div th:replace="/fragments/partials.html :: footer"></div>
+<div th:replace="~{/fragments/partials.html :: footer}"></div>
+</div>
 </body>
 </html>

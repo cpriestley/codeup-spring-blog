@@ -18,7 +18,7 @@ public class User {
         email = copy.email;
         password = copy.password;
         username = copy.username;
-        name = copy.name;
+        fullName = copy.fullName;
         posts = copy.posts;
     }
     @Id
@@ -30,9 +30,9 @@ public class User {
     private String password;
     @Column(nullable = false, length = 50)
     private String username;
-    @Column(nullable = false, length = 50)
-    private String name;
-    @OneToMany(mappedBy="user", targetEntity=Post.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Column(name = "fullname", nullable = false, length = 50)
+    private String fullName;
+    @OneToMany(mappedBy="user", targetEntity=Post.class, fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     private List<Post> posts;
 
 }

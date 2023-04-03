@@ -1,6 +1,7 @@
 package com.code.codeupspringblog.services.impl;
 
 import com.code.codeupspringblog.models.Post;
+import com.code.codeupspringblog.models.User;
 import com.code.codeupspringblog.services.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +23,20 @@ public class EmailServiceImpl implements EmailService {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom(from);
         msg.setTo(post.getUser().getEmail());
+        msg.setSubject(subject);
+        msg.setText(body);
+        try {
+            emailSender.send(msg);
+        } catch (MailException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void sendWelcomeEmail(User user, String subject, String body) {
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setFrom(from);
+        msg.setTo(user.getEmail());
         msg.setSubject(subject);
         msg.setText(body);
         try {

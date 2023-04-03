@@ -26,12 +26,14 @@ public class HelloController {
     }
 
     @GetMapping("/join")
-    public String showJoinForm() {
+    public String showJoinForm(Model model) {
+        model.addAttribute("classes", "text-center my-5 rounded-5 shadow-lg border border-1 border-dark py-5 d-none");
         return "join";
     }
 
     @PostMapping("/join")
     public String joinCohort(@RequestParam(name = "cohort") String cohort, Model model) {
+        model.addAttribute("classes", "text-center my-5 rounded-5 shadow-lg border border-1 border-dark py-5");
         model.addAttribute("cohort", String.format("Welcome to %s", cohort));
         return "join";
     }

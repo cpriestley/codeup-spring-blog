@@ -13,7 +13,9 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(nullable = false, length = 150)
+    @Column(name = "slug", columnDefinition = "varchar(250) not null")
+    private String slug;
+    @Column(name = "title", columnDefinition = "varchar(150) not null")
     private String title;
     @Column(nullable = false, length = 5000)
     private String body;

@@ -29,11 +29,16 @@ public class PostController {
         model.addAttribute( "posts", posts);
         return "/posts/index";
     }
-    @GetMapping("/posts/{id}")
-    public String getPost(@PathVariable long id, Model model) {
-        model.addAttribute("post", postRepo.getPostById(id));
+    @GetMapping("/posts/{slug}")
+    public String getPostBySlug(@PathVariable String slug, Model model) {
+        model.addAttribute("post", postRepo.getPostBySlug(slug));
         return "/posts/show";
     }
+//    @GetMapping("/posts/{id}")
+//    public String getPostById(@PathVariable long id, Model model) {
+//        model.addAttribute("post", postRepo.getPostById(id));
+//        return "/posts/show";
+//    }
     @GetMapping("/posts/{id}/delete")
     public String deletePost(@PathVariable long id) {
         Post post = postRepo.getPostById(id);

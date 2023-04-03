@@ -6,26 +6,26 @@
 </head>
 <body>
     <header>
-        <div th:replace="/fragments/partials.html :: navbar"></div>
+        <div th:replace="~{/fragments/partials.html :: navbar}"></div>
     </header>
     <div class="container my-3">
         <h1 class="my-3">Join Cohort</h1>
     </div>
     <div class="container">
-        <form class="row g-3 mb-3" th:action="@{/join}" method="post">
+        <form class="mb-3 row" th:action="@{/join}" method="post">
             <div class="col-auto">
-                <label for="cohor-lbl" class="visually-hidden">Cohort</label>
-                <input type="text" readonly class="form-control-plaintext" id="cohor-lbl" value="Cohort Name: ">
+                <div class="form-floating">
+                    <input class="form-control" name="cohort" id="cohort-ip" type="text" placeholder="Cohort Name"/>
+                    <label for="cohort-ip">Cohort Name</label>
+                </div>
             </div>
-            <div class="col-auto">
-                <label for="cohort-ip" class="visually-hidden">Cohort Input</label>
-                <input type="text" name="cohort" id="cohort-ip" class="form-control">
-            </div>
-            <div class="col-auto">
-                <button class="btn btn-outline-dark">Join now</button>
+            <div class="col-auto align-middle">
+                <button class="btn btn-outline-dark mt-2">Join now</button>
             </div>
         </form>
-        <h3 class="mb-3" th:text="${cohort}"></h3>
+        <div th:class="${classes}">
+            <h1 th:text="${cohort}"></h1>
+        </div>
     </div>
     <div th:replace="~{/fragments/partials.html :: footer}"></div>
 </body>

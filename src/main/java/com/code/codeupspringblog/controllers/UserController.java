@@ -2,8 +2,8 @@ package com.code.codeupspringblog.controllers;
 
 import com.code.codeupspringblog.models.User;
 import com.code.codeupspringblog.repositories.UserRepository;
+import com.code.codeupspringblog.services.UserRegistrationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class UserController {
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final UserRegistrationService userRegistrationService;
 
     @GetMapping("/sign-up")
     public String showSignupForm(Model model) {
@@ -25,9 +25,7 @@ public class UserController {
 
     @PostMapping("/sign-up")
     public String saveUser(@ModelAttribute User user) {
-        String hash = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hash);
-        userRepository.save(user);
+        userRegistrationService.register(user);
         return "redirect:/login";
     }
 

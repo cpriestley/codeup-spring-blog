@@ -13,27 +13,27 @@ public class UserWithRoles extends User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        String roles = ""; // Since we're not using the authorization part of the component
+        String roles = super.getRole().getRoleName();
         return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return super.isAccountNonExpired();
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return super.isAccountNonLocked();
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return super.isCredentialsNonExpired();
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return !super.isLoginDisabled();
     }
 }

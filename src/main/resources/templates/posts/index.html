@@ -36,7 +36,7 @@
                     <p class="mb-0 col text-muted">post id: <span th:text="${post.id}"></span></p>
                 </div>
             </div>
-            <form th:action="@{/posts/{id}/delete(id=${post.id})}" sec:authorize="hasAnyAuthority('ADMIN')">
+            <form th:action="@{/posts/{id}/delete(id=${post.id})}" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
                 <button class="btn btn-outline-danger" type="submit" th:text="Delete"></button>
             </form>
         </div>

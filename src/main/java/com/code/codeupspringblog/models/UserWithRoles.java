@@ -13,7 +13,12 @@ public class UserWithRoles extends User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        String roles = super.getRole().getRoleName();
+        String roles;
+        if ("ADMIN".equals(super.getRole().getRoleName())) {
+            roles = "ROLE_USER, ROLE_ADMIN";
+        } else {
+            roles = "ROLE_USER";
+        }
         return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
     }
 

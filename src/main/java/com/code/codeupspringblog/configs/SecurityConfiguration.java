@@ -43,7 +43,7 @@ public class SecurityConfiguration {
             .authorizeHttpRequests(request -> request
                 .requestMatchers("/hello", "/hello/{name}", "/posts/create", "/posts/{id}/edit", "/posts/{id}/delete", "/users/{id}/delete")
                 .authenticated()
-                .requestMatchers("/", "/css/**", "/img/**", "/js/**",
+                .requestMatchers("/", "/test", "/css/**", "/img/**", "/js/**",
                         "/sign-up", "/posts", "/posts/{id}", "/join", "/roll-dice", "/roll-dice/{guess}")
                 .permitAll()
             );
